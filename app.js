@@ -23,4 +23,8 @@ app.use('/kpi', kpiRoute);
 app.use('/report', reportRoute);
 app.use('/department', departmentRoute);
 
+app.get('/', (req, res) => {
+    res.send("App is Running...");
+})
+
 module.exports = app;
