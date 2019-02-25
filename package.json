@@ -4,7 +4,7 @@
   "description": "User Task Management System for Employee",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
