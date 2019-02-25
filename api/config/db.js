@@ -11,5 +11,6 @@ module.exports = mysql.createConnection({
     host: '185.38.44.227',
     user: 'citykaro_ahmed',
     password: 'attari11',
+    port:3306,
     database: 'citykaro_task_manage'
 });
