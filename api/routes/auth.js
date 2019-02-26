@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const checkAuth = require('./../middleware/checkAuth');
-const connection = require('./../config/db');
+// const connection = require('./../config/db');
+const connection = require('./../../server');
 
 //Get All Employees
 router.post('/login', function (req, res) {

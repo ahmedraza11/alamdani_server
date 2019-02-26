@@ -18,8 +18,11 @@ router.get('/', function (req, res) {
 	    department on
     department.id = kpi.dept_id
     `, function (error, results, fields) {
-            if (error) throw error;
-            res.send(results)
+            if (error) {
+                throw error;
+            } else {
+                res.send(results)
+            }
         });
 });
 

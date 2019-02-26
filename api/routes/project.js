@@ -5,8 +5,11 @@ const connection = require('./../config/db');
 // Get All Projects
 router.get('/', function (req, res, next) {
     connection.query('SELECT * FROM project', (err, result) => {
-        if (err) res.status(500).json({ message: "Error in fetching Projects", error: err });
-        res.status(200).json(result);
+        if (err) {
+            res.status(500).json({ message: "Error in fetching Projects", error: err });
+        } else {
+            res.status(200).json(result);
+        }
     });
 })
 
