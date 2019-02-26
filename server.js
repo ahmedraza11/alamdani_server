@@ -12,7 +12,7 @@ const db_config = {
   database: 'citykaro_task_manage'
 }
 
-export var connection;
+module.exports = connection;
 
 function handleDisconnect() {
   connection = mysql.createPool(db_config);
