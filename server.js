@@ -11,9 +11,8 @@ const db_config = {
   // port:3306,
   database: 'citykaro_task_manage'
 }
-
 function handleDisconnect() {
-  module.exports = connection = mysql.createConnection(db_config);
+  connection = mysql.createConnection(db_config);
   connection.connect(function (err) {
     if (err) {
       console.log('error when connecting to db:', err);
@@ -29,6 +28,7 @@ function handleDisconnect() {
     }
   });
 }
+module.exports = connection;  
 
 handleDisconnect();
 
