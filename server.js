@@ -12,10 +12,10 @@ const db_config = {
   database: 'citykaro_task_manage'
 }
 
-var connection;
+export var connection;
 
 function handleDisconnect() {
-  connection = mysql.createConnection(db_config);
+  connection = mysql.createPool(db_config);
   connection.connect(function (err) {
     if (err) {
       console.log('error when connecting to db:', err);
@@ -33,8 +33,6 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
-
-module.exports = connection;
 
 const server = http.createServer(app);
 
