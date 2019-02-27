@@ -1,9 +1,7 @@
 const http = require('http');
 const app = require('./app');
-const mysql = require('mysql');
 const port = process.env.PORT || 3001;
-// const db_config = require('./api/config/db');
-
+const connection = require('./api/config/db');
 // const db_config = {
 //   host: '185.38.44.227',
 //   user: 'citykaro_ahmed',
@@ -14,25 +12,25 @@ const port = process.env.PORT || 3001;
 
 // var connection;
 
-// function handleDisconnect() {
-//   connection = mysql.createPool(db_config);
-//   connection.connect(function (err) {
-//     if (err) {
-//       console.log('error when connecting to db:', err);
-//       setTimeout(handleDisconnect, 2000);
-//     }
-//   });
-//   connection.on('error', function (err) {
-//     console.log('db error', err);
-//     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-//       handleDisconnect();
-//     } else {
-//       throw err;
-//     }
-//   });
-// }
+function handleDisconnect() {
+  connection.connect(function (err) {
+    if (err) {
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000);
+    }
+  });
+  connection.on('error', function (err) {
+    console.log('db error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+  console.log('DB connection::::::', connection);
+}
 
-// handleDisconnect();
+handleDisconnect();
 
 const server = http.createServer(app);
 
