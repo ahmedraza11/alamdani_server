@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const checkAuth = require('./../middleware/checkAuth');
-// const connection = require('./../config/db');
-const connection = require('./../../server').connection;
+const connection = require('./../config/db');
+// const connection = require('./../../server').connection;
 
 //Get All Employees
 router.post('/login', function (req, res) {
@@ -90,8 +90,6 @@ router.get('/getUser/:id', checkAuth, function (req, res) {
             }
         });
 })
-
-
 
 // Update User Credentials
 router.put('/authUpdate', checkAuth, function (req, res) {
