@@ -139,7 +139,7 @@ router.get('/assignedTask/:userId', checkAuth, function (req, res, next) {
 
 
 // Get specific Task
-router.get('/getTask/:taskId', function (req, res, next) {
+router.get('/getTask/:taskId', checkAuth, function (req, res, next) {
     const taskId = req.params.taskId;
     connection.query(
         `SELECT * FROM task WHERE id = ${taskId}`
@@ -149,7 +149,8 @@ router.get('/getTask/:taskId', function (req, res, next) {
         });
 })
 
-router.post('/', function (req, res) {
+router.post('/', checkAuth, function (req, res) {
+    console.log("Add Task", req.body);
     connection.query(`
     INSERT INTO task
         (
@@ -171,7 +172,7 @@ router.post('/', function (req, res) {
             fileQuantity, 
             createdAt
         )
-         
+         values
         (
             "${req.body.taskName}",
             "${req.body.emailSub}",
@@ -192,11 +193,14 @@ router.post('/', function (req, res) {
             "${new Date().toISOString()}"
         )`,
         (err, result) => {
-            if (err) res.status(500).json({
-                message: "unfortunatly task NOT Created",
-                taskCreated: false,
-                error: err
-            }); else {
+            if (err) {
+                res.status(500).json({
+                    message: "unfortunatly task NOT Created",
+                    taskCreated: false,
+                    error: err
+                });
+            }
+            else {
                 res.status(200).json({
                     message: "Task Successfully Created",
                     taskCreated: true,
@@ -207,7 +211,7 @@ router.post('/', function (req, res) {
 });
 
 
-router.patch('/update/:id', function (req, res) {
+router.patch('/update/:id', checkAuth, function (req, res) {
     connection.query(
         `UPDATE task 
             SET 
@@ -253,7 +257,7 @@ router.patch('/update/:id', function (req, res) {
 
 
 // Update a Task Status
-router.patch('/updateTaskStatus/:id', function (req, res) {
+router.patch('/updateTaskStatus/:id', checkAuth, function (req, res) {
     connection.query(`
         UPDATE task
             SET 

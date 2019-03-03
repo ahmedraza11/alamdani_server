@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('./../middleware/checkAuth');
 const connection = require('./../config/db');
 
 //Get All KPI    
@@ -26,7 +27,7 @@ router.get('/', function (req, res) {
         });
 });
 
-router.post('/', function (req, res) {
+router.post('/',checkAuth, function (req, res) {
     console.log("insert kpi::::", req.body);
     connection.query(`
     INSERT INTO kpi
@@ -61,7 +62,7 @@ router.post('/', function (req, res) {
         });
 });
 
-router.patch('/:id', function (req, res) {
+router.patch('/:id', checkAuth,function (req, res) {
     console.log("update kpi::::", req.body);
     const { id } = req.params;
     connection.query(`
